@@ -16,6 +16,8 @@
     "interact_radius": 2.0,
     "pulse_cost": 3,
     "pulse_radius": 5.0,
+    "pulse_stun_s": 2.0,
+    "pulse_push_m": 4.0,
     "fuel_max": 100,
     "fuel_decay_per_s": 1.0,
     "fuel_per_mote": 10,
@@ -43,7 +45,14 @@
       "pulse_drain_hit": 15,
       "dawn_lit_lantern_base": 50,
       "dawn_fuel_per_unit": 1,
-      "flame_remaining": 50
-    }
+      "flame_remaining": 50,
+      "per_mote": 5,
+      "per_lantern": 100,
+      "per_stun": 5,
+      "per_second_left": 0,
+      "per_flame_left": 50
+    },
+    "shade_speed": 4.0,
+    "shade_hit_radius": 1.0
   }
 }

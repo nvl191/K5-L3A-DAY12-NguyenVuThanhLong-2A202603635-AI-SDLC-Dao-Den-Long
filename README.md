@@ -24,6 +24,19 @@ Mở `http://localhost:4173`. Leaderboard lưu trong `leaderboard.json` tại m�
 
 Điều khiển: `W A S D` di chuyển theo hướng camera, rê chuột xoay camera, `Space` nhảy, `Shift` lướt, `E` tương tác/châm dầu, `Q` Tỏa Sáng, `P` hoặc `Esc` tạm dừng. Cài đặt lưu âm lượng, độ nhạy chuột và bảng màu dễ phân biệt trên trình duyệt hiện tại.
 
+## Cách tính điểm
+
+| Sự kiện | Điểm |
+|---|---:|
+| Mỗi đom đóm nạp vào đèn | +5 |
+| Thắp đèn lần đầu | +100 |
+| Thắp lại đèn đã cạn dầu | +40 |
+| Bóng Mực trúng Tỏa Sáng | +5 (+15 nếu đang hút dầu một đèn) |
+| Thắng ở bình minh: mỗi đèn còn sáng | +50 + phần nguyên của dầu còn lại |
+| Thắng ở bình minh: mỗi Ngọn Lửa còn lại | +50 |
+
+Không còn thưởng theo thời gian còn lại (bỏ ở Ticket-03). Thắng khi còn sống và có ít nhất `ceil(60% × số đèn)` đèn đang sáng lúc bình minh; hết lửa thì thua. Các số khai báo trong `game.contract.json`; các khóa `per_*` và `shade_*`/`pulse_*` của contract v1.0 được giữ nguyên bên cạnh khóa của các ticket sau, `per_second_left` bằng 0 vì thưởng thời gian đã bị bỏ.
+
 ## Kiểm tra, headless và benchmark
 
 ```bash
