@@ -2,33 +2,39 @@
 
 > **Cá nhân** (1 người / 1 MSSV) · Áp dụng SDLC cùng AI để xây game 3D qua 4 phase.
 > **Lab board + trợ giảng:** [Đảo Đèn Lồng Lab](https://claude.ai/artifact/Q1RYyv1dxjUczzCbd2ZnoW)
-> **Video demo:** sẽ bổ sung khi hoàn tất Phase 4.
+> **Video demo:** _chưa quay_ — sẽ đính kèm Release `v1.0.0` hoặc lưu tại `docs/demo/demo.mp4`, rồi thay dòng này bằng link.
 
 ## Game
 
 **Đảo Đèn Lồng** là game phiêu lưu 3D góc nhìn thứ ba chạy trong trình duyệt. Mây gom đom đóm, thắp và châm dầu cho đèn, rồi giữ đủ đèn sáng tới bình minh qua ba hòn đảo.
 
-## Chạy bản hiện tại
+## Chạy game
 
 Yêu cầu Node.js 20.19+.
 
+Clone repo sạch và chạy đúng 3 lệnh để build, mở game:
+
 ```bash
 npm ci
-npm run dev
+npm run build
+npm start
 ```
 
-Mở địa chỉ Vite hiện trong Terminal (thường là `http://localhost:5173`). Tạo bản web tĩnh bằng `npm run build`; kết quả nằm trong `dist/`.
+Mở `http://localhost:4173`. Leaderboard lưu trong `leaderboard.json` tại máy này, ngoài repo. Trong lúc phát triển, dùng `npm run dev`.
 
 Điều khiển: `W A S D` di chuyển theo hướng camera, rê chuột xoay camera, `Space` nhảy, `Shift` lướt, `E` tương tác/châm dầu, `Q` Tỏa Sáng, `P` hoặc `Esc` tạm dừng. Cài đặt lưu âm lượng, độ nhạy chuột và bảng màu dễ phân biệt trên trình duyệt hiện tại.
 
-## Kiểm tra và headless
+## Kiểm tra, headless và benchmark
 
 ```bash
 npm run verify
 node src/cli.js --seed 7 --night 1 --scenario tests/scenarios/phase-3-dawn-win.json --ticks 60 --snapshot-every 60 --out /tmp/dawn.jsonl
+npm run bench -- --seed 42 --duration 30 --out bench.json
+npm run soak -- --seed 7 --nights 10 --out soak.json
+npm run start -- --export-leaderboard out.json
 ```
 
-Headless chạy mô phỏng JavaScript thuần ở 60 tick/giây, không cần cửa sổ/GPU. Cùng seed, scenario và inputs tạo JSONL giống hệt. Contract hiện tại là [v1.2](game.contract.json); xem các [bằng chứng Phase 1](docs/proof/phase-1/README.md) và [Phase 3](docs/proof/phase-3/README.md).
+Headless chạy mô phỏng JavaScript thuần ở 60 tick/giây. Cùng seed, scenario và inputs tạo JSONL giống hệt. Benchmark mở Chrome ở 1280×720 với GPU thật, dùng cảnh chuẩn 200 Bóng Mực, 100 đom đóm và 3 đèn, bỏ 3 giây khởi động rồi đo đủ thời lượng; báo cáo ghi kèm cấu hình máy (`machine`) và tên GPU. Cờ tắt vsync được truyền cho Chrome; `BENCH_SOFTWARE_GL=1` ép render phần mềm để so sánh. `peak_mem_mb` là `null` vì bản web không thể tách RSS của tiến trình renderer ổn định trên các hệ điều hành. Benchmark trên máy chấm mới là số liệu nghiệm thu. Soak test chạy 10 đêm bằng bot có seed (nhặt đom đóm, châm dầu, Tỏa Sáng) và báo số tick mỗi đêm, bộ nhớ đầu/cuối. Contract là [v1.3](game.contract.json); xem [bằng chứng Phase 1](docs/proof/phase-1/README.md), [Phase 3](docs/proof/phase-3/README.md) và [Phase 4](docs/proof/phase-4/README.md).
 
 ## Tài liệu của lab
 
@@ -39,19 +45,20 @@ Headless chạy mô phỏng JavaScript thuần ở 60 tick/giây, không cần c
 | [SUBMISSION.md](SUBMISSION.md) | Repo, hạn tag, Release, video và checklist |
 | [RULES.md](RULES.md) | Quy định AI, bằng chứng, bản quyền và bảo mật |
 | [RUBRIC.md](RUBRIC.md) | Thang điểm |
-| [AGENTS.md](AGENTS.md) | Hướng dẫn dành cho agent trong repo |
+| [AGENTS.md](AGENTS.md) | Hướng dẫn dành cho agent trong repo (kèm hook Stop, skill `phase-proof` trong `.claude/`, CI trong `.github/workflows/`) |
 
 ## Tài liệu dự án
 
 - PRD-0 và giả định: [Phase 1](docs/notes/phase-1.md).
 - Ticket-02: [Phase 2](docs/notes/phase-2.md).
 - Ticket-03, dầu đèn và luật bình minh: [Phase 3](docs/notes/phase-3.md), [ADR-001](docs/notes/adr-001-lantern-fuel.md), [changelog](docs/CHANGELOG.md).
+- Ticket-04, benchmark, ổn định, leaderboard và accessibility: [Phase 4](docs/notes/phase-4.md), [retro](docs/notes/retro.md).
 - Nhật ký dùng AI: [ai-log.md](docs/notes/ai-log.md).
 - Nguồn và giấy phép: [CREDITS.md](CREDITS.md), [LICENSE](LICENSE).
 
 ## Sáng tạo của tôi
 
-Đồ họa procedural low-poly, ánh sáng vàng ấm đối lập sương xanh tím, HUD dạng kính mờ, menu chuyện kể và hiệu ứng âm thanh tổng hợp được tạo bằng code. Chế độ màu dễ phân biệt, vết rách hình dạng trên đèn tắt và thanh dầu trên đèn là trình bày giao diện; logic headless vẫn là nguồn sự thật.
+Đồ họa procedural low-poly, ánh sáng vàng ấm đối lập sương xanh tím, HUD dạng kính mờ, menu chuyện kể và hiệu ứng âm thanh tổng hợp được tạo bằng code. Chế độ màu dễ phân biệt, vết rách hình dạng trên đèn tắt và thanh dầu trên đèn là trình bày giao diện; logic headless vẫn là nguồn sự thật. Ảnh chụp cảnh và menu: [bench-scene.png](docs/proof/phase-4/bench-scene.png), [menu.png](docs/proof/phase-4/menu.png).
 
 ## Lab và lộ trình
 

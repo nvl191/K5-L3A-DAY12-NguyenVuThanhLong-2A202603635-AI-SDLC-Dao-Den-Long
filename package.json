@@ -6,9 +6,13 @@
   "scripts": {
     "dev": "vite --host 0.0.0.0",
     "build": "vite build",
+    "start": "node server.js",
+    "bench": "node src/bench.js",
     "preview": "vite preview --host 0.0.0.0",
     "test": "node --test",
-    "verify": "node scripts/verify.mjs"
+    "verify": "node scripts/verify.mjs",
+    "soak": "node --expose-gc src/soak.js",
+    "export:leaderboard": "node src/cli.js"
   },
   "dependencies": {
     "three": "^0.180.0"

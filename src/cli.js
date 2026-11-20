@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 import fs from 'node:fs';
 import { runSimulation } from './sim/simulation.js';
+import { rankEntries } from './leaderboard.js';
 
 function parseArgs(argv) {
   const out = {};
-  const flags = new Set(['--seed','--night','--scenario','--inputs','--ticks','--out','--snapshot-every']);
+  const flags = new Set(['--seed','--night','--scenario','--inputs','--ticks','--out','--snapshot-every','--export-leaderboard']);
   for (let i=0;i<argv.length;i++) {
     const key=argv[i];
     if (!flags.has(key)) throw new Error(`unknown argument: ${key}`);
@@ -51,6 +52,14 @@ function validateScenario(s) {
 
 try {
   const a=parseArgs(process.argv.slice(2));
+  if(a['--export-leaderboard']) {
+    const path=a['--export-leaderboard'];
+    let entries=[];
+    try { const saved=JSON.parse(fs.readFileSync('leaderboard.json','utf8')); entries=Array.isArray(saved.entries)?saved.entries:[]; }
+    catch(error) { if(error.code!=='ENOENT') throw new Error(`leaderboard.json: ${error.message}`); }
+    fs.writeFileSync(path,JSON.stringify({entries:rankEntries(entries)},null,2)+'\n','utf8');
+    process.exit(0);
+  }
   const int=(key,fallback)=>{
     const v=a[key]===undefined?fallback:Number(a[key]);
     if(!Number.isInteger(v)||v<0) throw new Error(`${key} must be a non-negative integer`);

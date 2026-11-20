@@ -28,6 +28,8 @@
         </div>
         <div id="interact-prompt" class="interact-prompt hidden"><kbd>E</kbd><span id="interact-action">Thắp sáng</span><b id="deposit-progress">0/10</b></div>
         <div id="target-arrow" class="target-arrow hidden"><span>✦</span><b>Đèn gần nhất</b></div>
+        <div id="shade-arrow" class="shade-arrow hidden" aria-label="Bóng Mực ở ngoài tầm nhìn"><span>➤</span><b>Bóng Mực</b></div>
+        <div id="fuel-alert" class="fuel-alert hidden" role="status"></div>
         <div class="controls-hint"><kbd>W A S D</kbd> di chuyển <span>·</span> <kbd>Space</kbd> nhảy <span>·</span> <kbd>Q</kbd> tỏa sáng <span>·</span> <kbd>P</kbd> tạm dừng</div>
       </section>
 
@@ -45,7 +47,7 @@
       </section>
 
       <div id="toast" class="toast" role="status"></div>
-      <div id="wind-warning" class="wind-warning hidden">LÁ BAY NGƯỢC CHIỀU GIÓ</div>
+      <div id="wind-warning" class="wind-warning hidden" role="status">⚠ Gió sắp nổi</div>
     </main>
     <script type="module" src="/src/main.js"></script>
   </body>
