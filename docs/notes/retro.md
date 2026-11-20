@@ -26,6 +26,7 @@
 | 4 | `load_ms` âm khổng lồ nằm trong thư mục bằng chứng mà không ai nhận ra | Đọc lại JSON khi rà soát | Sửa phép tính |
 | 4 | `run_cmd = npm run start` nên `--export-leaderboard` bị npm nuốt, server treo | Chạy đúng lệnh mà contract sẽ ghép | Đổi thành `node server.js`, thêm test |
 | 4 | Chữ UI dưới 18 px (badge 9 px, cảnh báo gió 9 px, …) | Script đọc `font-size` thực tế của mọi phần tử | Sửa CSS, kiểm tra lại các màn hình |
+| 4 | Nút Tiếp tục sau tạm dừng không chạy tiếp: giao diện ngừng gọi `step()` khi pause nên mô phỏng còn nhớ nút pause đang nhấn; test mô phỏng đều đạt vì chỉ kiểm tra logic, không kiểm tra giao thức nhấn/nhả của giao diện | Bot quay video tạm dừng rồi tiếp tục, game kẹt ở màn hình tạm dừng; tái hiện bằng log trạng thái mô phỏng | Nhả nút pause trước khi tiếp tục, thêm test giao thức nhấn/nhả |
 | 4 | Viết lại soak thành bot biết chơi khi chưa đọc đặc tả; Ticket-04 quy định input ngẫu nhiên | Đối chiếu khi có đủ ba ticket | Khôi phục đúng mô hình input, thêm test kiểm tra hình dạng báo cáo |
 
 Bài học chung: một con số bằng chứng chỉ có giá trị khi đã đọc kỹ nó, và sửa một thứ gì đó "cho có ý nghĩa hơn" khi chưa đọc đặc tả gốc có thể làm sai yêu cầu. "Đã sinh file" chưa phải "đã đạt".

@@ -49,6 +49,13 @@ test('pause advances wall tick but freezes simulation time',()=>{
   assert.equal(sim.tick,3); assert.equal(sim.simTick,0); assert.equal(sim.state,'playing');
 });
 
+test('resume needs a released pause button before the next press (UI protocol)',()=>{
+  const sim=new Simulation({seed:1,night:1,scenario:{random_motes:false,random_shades:false}});
+  sim.step({pause:true});assert.equal(sim.state,'paused');
+  sim.step({pause:true});assert.equal(sim.state,'paused','holding pause is not a new press');
+  sim.step({pause:false});sim.step({pause:true});assert.equal(sim.state,'playing');
+});
+
 test('fall costs a flame even while invulnerable and ends immediately at zero',()=>{
   const lines=runSimulation({seed:1,night:1,ticks:2,snapshotEvery:1,scenario:{random_motes:false,random_shades:false,player:{pos:[0,-10.1,0],flames:1,invuln_ticks:50}}});
   const hit=event(lines,'player_hit');

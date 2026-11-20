@@ -68,7 +68,7 @@ function showScreen(kind,extra=''){
 }
 
 function startNight(n){currentNight=n;runSeed=(Date.now()>>>0);sim=new Simulation({seed:runSeed,night:n});sim.score=0;acc=0;lastCountdownSecond=-1;lastWindCycle=0;yaw=0;window.__lanternYaw=yaw;world.build(n);world.sync(sim.snapshot(),1/60);audio.start();screen.classList.add('hidden');hud.classList.remove('hidden');mode='playing';canvas.style.cursor='none';}
-function resumeGame(){if(!sim)return;pauseTap=true;mode='playing';screen.classList.add('hidden');hud.classList.remove('hidden');}
+function resumeGame(){if(!sim)return;sim.step({pause:false});pauseTap=true;mode='playing';screen.classList.add('hidden');hud.classList.remove('hidden');}
 function triggerPause(){if(mode==='playing'){pauseTap=true;}else if(mode==='pause'){resumeGame();}else if(mode==='result'){return;}}
 window.addEventListener('keydown',(e)=>{if(['Space','ArrowUp','ArrowDown','ArrowLeft','ArrowRight'].includes(e.code))e.preventDefault();if(captureBinding){const duplicate=Object.entries(settings.bindings).some(([id,code])=>id!==captureBinding&&code===e.code);if(duplicate){toast('Phím này đã được gán cho hành động khác');captureBinding=null;showScreen('settings');return;}settings.bindings[captureBinding]=e.code;captureBinding=null;showScreen('settings');return;}if(e.repeat)return;keys.add(e.code);if(e.code===settings.bindings.pause||e.code==='Escape'){if(mode==='playing'||mode==='pause')triggerPause();}});
 window.addEventListener('keyup',(e)=>keys.delete(e.code));

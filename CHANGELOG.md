@@ -42,3 +42,4 @@
 - Soak dùng input ngẫu nhiên đúng Ticket-04; báo cáo soak đúng sáu trường của đặc tả. Báo cáo benchmark thêm trường `machine`.
 - Sửa theo Ticket-02 khi rà soát cuối: Bóng Mực của cả ba đêm sinh 2 con tại tick 300 rồi 1 con mỗi khoảng sinh của đêm (trước đó Đêm 2 và 3 bắt đầu ở tick 420 và 360 với 1 con); đây là thay đổi hành vi headless có chủ đích.
 - Sửa `load_ms` âm trong benchmark; cải thiện hiệu năng render cảnh nhiều thực thể (xem `docs/proof/phase-4/README.md`).
+- Sửa lỗi sau phát hành `v1.0.0`: sau khi tạm dừng, nút Tiếp tục hoặc phím P có thể không tiếp tục mô phỏng (giao diện ngừng gọi `step()` nên mô phỏng vẫn thấy nút pause đang nhấn và bỏ qua lần nhấn tiếp theo, game quay lại màn hình tạm dừng). Giao diện nay nhả nút pause trước khi tiếp tục; mô phỏng và headless không đổi. Phát hiện khi quay video demo.
