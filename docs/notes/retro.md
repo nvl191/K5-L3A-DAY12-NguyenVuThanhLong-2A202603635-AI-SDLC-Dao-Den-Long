@@ -39,7 +39,7 @@ Bài học chung: một con số bằng chứng chỉ có giá trị khi đã đ
 
 ## Token và chi phí
 
-Giao diện công cụ không cung cấp số token cho Codex (Phase 1–3) lẫn Claude Code (Phase 4). Không ghi con số suy đoán; nếu nộp bài có số liệu thật thì bổ sung vào `ai-log.md`. Cách tiết kiệm: kiểm thử logic thuần trước đồ họa, đo benchmark ngắn (6–8 giây) khi thử nghiệm và chỉ chạy bản 30 giây để lấy bằng chứng cuối.
+Codex (Phase 1–3 và phần đầu Phase 4) không hiển thị số token nên không có số liệu. Phần Claude Code của Phase 4 đọc từ nhật ký phiên cục bộ: khoảng 139 nghìn token output, 227 input không qua cache, 507 nghìn token ghi cache và 23,1 triệu token đọc cache (chi tiết ở `ai-log.md`; không quy ra tiền). Cách tiết kiệm: kiểm thử logic thuần trước đồ họa, đo benchmark ngắn (6–8 giây) khi thử nghiệm và chỉ chạy bản 30 giây để lấy bằng chứng cuối, quay video bằng script thay vì làm lại thủ công.
 
 ## Nếu làm lại
 

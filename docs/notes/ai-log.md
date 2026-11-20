@@ -3,7 +3,7 @@
 | Phase | Công cụ | Việc dùng AI | Token/chi phí | Cách tiết kiệm |
 |---|---|---|---|---|
 | 1–3 | Codex trong ChatGPT | Đọc yêu cầu, lập cấu trúc, viết và rà soát mô phỏng/UI; sửa lỗi theo test | Chưa có số liệu token/chi phí hiển thị trong phiên này; không tự ước lượng thay số đo | Chia việc theo module, kiểm thử logic thuần trước khi hoàn thiện đồ họa |
-| 4 | Codex (benchmark, soak, bảng xếp hạng, accessibility) rồi Claude Code (rà soát theo ticket, sửa hiệu năng, test, harness, tài liệu) | Đọc yêu cầu, viết bench/soak/leaderboard; Claude Code đo lại, tìm nguyên nhân 7–8 FPS, thêm test và harness; đối chiếu lại với Ticket-02/03/04 và sửa các chỗ lệch | Chưa có số liệu token/chi phí hiển thị; không tự ước lượng | Đo benchmark ngắn khi thử, chỉ chạy bản đầy đủ để lấy bằng chứng; đọc code thay vì thử cờ ngẫu nhiên khi đổi cờ GPU không cải thiện |
+| 4 | Codex (benchmark, soak, bảng xếp hạng, accessibility) rồi Claude Code (rà soát theo ticket, sửa hiệu năng, test, harness, tài liệu) | Đọc yêu cầu, viết bench/soak/leaderboard; Claude Code đo lại, tìm nguyên nhân 7–8 FPS, thêm test và harness; đối chiếu lại với Ticket-02/03/04 và sửa các chỗ lệch | Claude Code: đọc từ nhật ký phiên cục bộ (107 lượt trả lời, tính đến lúc quay video demo): 227 input, ≈139 nghìn output, ≈507 nghìn ghi cache, ≈23,1 triệu đọc cache (cache đọc chiếm phần lớn vì ngữ cảnh dài được tái sử dụng). Chưa quy ra chi phí. Codex (Phase 1–4): không có số liệu | Đo benchmark ngắn khi thử, chỉ chạy bản đầy đủ để lấy bằng chứng; đọc code thay vì thử cờ ngẫu nhiên khi đổi cờ GPU không cải thiện |
 
 ## Lỗi AI và cách phát hiện
 
@@ -13,4 +13,4 @@
 - Phase 4 (rà soát): `run_cmd` làm `--export-leaderboard` bị npm nuốt; chữ UI dưới 18 px; lịch sinh Bóng Mực Đêm 2–3 lệch Ticket-02; một lần AI viết lại soak sai đặc tả (input ngẫu nhiên là yêu cầu) khi chưa có ticket gốc và đã khôi phục. Chi tiết ở [retro](retro.md).
 - Phase 4: benchmark đầu chỉ 7–8 FPS do đèn điểm trên mỗi đom đóm và tài nguyên riêng cho mỗi Bóng Mực; `load_ms` âm và soak chỉ chạy 0,2 giây vẫn được ghi vào thư mục bằng chứng. Phát hiện khi rà soát lại số liệu; chi tiết ở [proof Phase 4](../proof/phase-4/README.md) và [retro](retro.md).
 
-> Khi nộp bài, bổ sung số liệu token/chi phí nếu giao diện công cụ cung cấp; không ghi con số suy đoán.
+> Số token của Codex (Phase 1–3 và phần Codex của Phase 4) chưa có vì giao diện không hiển thị; không ghi con số suy đoán. Số của Claude Code là số đọc được từ nhật ký phiên, không phải hóa đơn.

@@ -2,7 +2,7 @@
 
 > **Cá nhân** (1 người / 1 MSSV) · Áp dụng SDLC cùng AI để xây game 3D qua 4 phase.
 > **Lab board + trợ giảng:** [Đảo Đèn Lồng Lab](https://claude.ai/artifact/Q1RYyv1dxjUczzCbd2ZnoW)
-> **Video demo:** _chưa quay_ — sẽ đính kèm Release `v1.0.0` hoặc lưu tại `docs/demo/demo.mp4`, rồi thay dòng này bằng link.
+> **Video demo (2 phút 31 giây):** [Release v1.0.0](https://github.com/nvl191/K5-L3A-DAY12-NguyenVuThanhLong-2A202603635-AI-SDLC-Dao-Den-Long/releases/download/v1.0.0/demo.mp4) hoặc [docs/demo/demo.mp4](docs/demo/demo.mp4). Phần chơi game do bot gửi phím giả lập; các lệnh kiểm tra, headless, soak và benchmark được chạy thật trong video.
 
 ## Game
 
