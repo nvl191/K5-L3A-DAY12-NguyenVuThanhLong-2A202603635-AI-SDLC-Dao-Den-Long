@@ -8,9 +8,15 @@
 
 **Đảo Đèn Lồng** là game phiêu lưu 3D góc nhìn thứ ba chạy trong trình duyệt. Mây gom đom đóm, thắp và châm dầu cho đèn, rồi giữ đủ đèn sáng tới bình minh qua ba hòn đảo.
 
+![Màn chơi](docs/proof/phase-4/hud.png)
+
+| Menu | Cảnh benchmark (200 Bóng Mực, 100 đom đóm) |
+|---|---|
+| ![Menu](docs/proof/phase-4/menu.png) | ![Cảnh benchmark](docs/proof/phase-4/bench-scene.png) |
+
 ## Chạy game
 
-Yêu cầu Node.js 20.19+.
+Yêu cầu hệ thống: macOS hoặc Linux, Node.js 20.19+, trình duyệt hiện đại có WebGL; benchmark cần Chrome hoặc Chromium (đặt `CHROME_BIN` nếu không ở vị trí mặc định).
 
 Clone repo sạch và chạy đúng 3 lệnh để build, mở game:
 
@@ -20,7 +26,7 @@ npm run build
 npm start
 ```
 
-Mở `http://localhost:4173`. Leaderboard lưu trong `leaderboard.json` tại máy này, ngoài repo. Trong lúc phát triển, dùng `npm run dev`.
+Mở `http://localhost:4173` (đổi cổng bằng biến `PORT`). Leaderboard lưu trong `leaderboard.json` tại máy này, ngoài repo. Trong lúc phát triển, dùng `npm run dev`.
 
 Điều khiển: `W A S D` di chuyển theo hướng camera, rê chuột xoay camera, `Space` nhảy, `Shift` lướt, `E` tương tác/châm dầu, `Q` Tỏa Sáng, `P` hoặc `Esc` tạm dừng. Cài đặt lưu âm lượng, độ nhạy chuột và bảng màu dễ phân biệt trên trình duyệt hiện tại.
 
@@ -44,7 +50,7 @@ npm run verify
 node src/cli.js --seed 7 --night 1 --scenario tests/scenarios/phase-3-dawn-win.json --ticks 60 --snapshot-every 60 --out /tmp/dawn.jsonl
 npm run bench -- --seed 42 --duration 30 --out bench.json
 npm run soak -- --seed 7 --nights 10 --out soak.json
-npm run start -- --export-leaderboard out.json
+node server.js --export-leaderboard out.json
 ```
 
 Headless chạy mô phỏng JavaScript thuần ở 60 tick/giây. Cùng seed, scenario và inputs tạo JSONL giống hệt. Benchmark mở Chrome ở 1280×720 với GPU thật, dùng cảnh chuẩn 200 Bóng Mực, 100 đom đóm và 3 đèn, bỏ 3 giây khởi động rồi đo đủ thời lượng; báo cáo ghi kèm cấu hình máy (`machine`) và tên GPU. Cờ tắt vsync được truyền cho Chrome; `BENCH_SOFTWARE_GL=1` ép render phần mềm để so sánh. `peak_mem_mb` là `null` vì bản web không thể tách RSS của tiến trình renderer ổn định trên các hệ điều hành. Benchmark trên máy chấm mới là số liệu nghiệm thu. Soak test chạy 10 đêm bằng bot có seed (nhặt đom đóm, châm dầu, Tỏa Sáng) và báo số tick mỗi đêm, bộ nhớ đầu/cuối. Contract là [v1.3](game.contract.json); xem [bằng chứng Phase 1](docs/proof/phase-1/README.md), [Phase 3](docs/proof/phase-3/README.md) và [Phase 4](docs/proof/phase-4/README.md).
@@ -64,8 +70,9 @@ Headless chạy mô phỏng JavaScript thuần ở 60 tick/giây. Cùng seed, sc
 
 - PRD-0 và giả định: [Phase 1](docs/notes/phase-1.md).
 - Ticket-02: [Phase 2](docs/notes/phase-2.md).
-- Ticket-03, dầu đèn và luật bình minh: [Phase 3](docs/notes/phase-3.md), [ADR-001](docs/notes/adr-001-lantern-fuel.md), [changelog](docs/CHANGELOG.md).
+- Ticket-03, dầu đèn và luật bình minh: [Phase 3](docs/notes/phase-3.md), [ADR-001](docs/notes/adr-001-lantern-fuel.md), [CHANGELOG](CHANGELOG.md).
 - Ticket-04, benchmark, ổn định, leaderboard và accessibility: [Phase 4](docs/notes/phase-4.md), [retro](docs/notes/retro.md).
+- Changelog bốn phase: [CHANGELOG.md](CHANGELOG.md). Bằng chứng Phase 2: [proof Phase 2](docs/proof/phase-2/README.md).
 - Nhật ký dùng AI: [ai-log.md](docs/notes/ai-log.md).
 - Nguồn và giấy phép: [CREDITS.md](CREDITS.md), [LICENSE](LICENSE).
 

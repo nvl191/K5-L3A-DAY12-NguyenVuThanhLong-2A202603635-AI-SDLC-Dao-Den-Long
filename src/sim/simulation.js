@@ -389,7 +389,7 @@ export class Simulation {
     }
     const tick=this.simTick;
     if (this.randomShades && tick >= this.spec.shadeFirst && (tick-this.spec.shadeFirst)%this.spec.shadeEvery===0 && this.shades.length < this.spec.maxShades) {
-      const count=this.night===1 && tick===this.spec.shadeFirst ? 2 : 1;
+      const count=tick===this.spec.shadeFirst ? 2 : 1;
       for(let i=0;i<count && this.shades.length<this.spec.maxShades;i++) {
         const pts=shadePoints(this.night).filter((p)=>distanceXZ(p,this.player.pos)>=15);
         if(!pts.length) break;

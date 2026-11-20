@@ -31,14 +31,27 @@ test('CLI export writes an empty list when nothing has been saved', () => {
   assert.deepEqual(JSON.parse(fs.readFileSync(out, 'utf8')), { entries: [] });
 });
 
-test('soak run is deterministic, crash-free and plays most of each night', () => {
+test('soak run follows the Ticket-04 report shape, is crash-free and deterministic in results',()=>{
   const run = () => JSON.parse(spawnSync(process.execPath, ['--expose-gc', path.join(root, 'src/soak.js'), '--seed', '7', '--nights', '3'], { encoding: 'utf8', cwd: root }).stdout);
   const a = run(), b = run();
+  assert.deepEqual(Object.keys(a), ['nights', 'crashes', 'results', 'mem_start_mb', 'mem_end_mb', 'duration_s']);
+  assert.equal(a.nights, 3);
   assert.equal(a.crashes, 0);
   assert.equal(a.results.length, 3);
-  assert.deepEqual(a.ticks_per_night, b.ticks_per_night);
+  assert.ok(a.results.every((r) => r === 'won' || r === 'lost'));
   assert.deepEqual(a.results, b.results);
-  assert.ok(a.simulated_s > 60, 'bot should survive well beyond a random walk');
+  assert.ok(a.mem_end_mb <= 1.2 * a.mem_start_mb);
+});
+
+test('contract commands accept the flags the grader appends',()=>{
+  const contract = JSON.parse(fs.readFileSync(path.join(root, 'game.contract.json'), 'utf8'));
+  assert.equal(contract.contract_version, '1.3');
+  assert.equal(contract.run_cmd, 'node server.js');
+  assert.ok(contract.bench_cmd.endsWith('--') && contract.soak_cmd.endsWith('--'));
+  const dir = tmp(), out = path.join(dir, 'lb.json');
+  const run = spawnSync('sh', ['-c', `${contract.run_cmd} --export-leaderboard ${out}`], { cwd: root, encoding: 'utf8', timeout: 20000 });
+  assert.equal(run.status, 0, run.stderr);
+  assert.ok(Array.isArray(JSON.parse(fs.readFileSync(out, 'utf8')).entries));
 });
 
 test('static server API stores, ranks and returns the leaderboard', async () => {

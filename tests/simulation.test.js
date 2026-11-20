@@ -127,6 +127,15 @@ test('shade schedule creates two stable ids at tick 300',()=>{
   assert.ok(eventLines.every((x)=>x.tick===300));
 });
 
+test('every night spawns two shades at tick 300, then one per night interval (Ticket-02)',()=>{
+  for(const [night,every] of [[1,480],[2,420],[3,360]]){
+    const lines=runSimulation({seed:2,night,ticks:300+every,snapshotEvery:1000,scenario:{random_motes:false,random_drifters:false,wind_enabled:false}});
+    const spawns=lines.filter((x)=>x.type==='event'&&x.name==='shade_spawned');
+    assert.deepEqual(spawns.map((x)=>x.tick),[300,300,300+every],`night ${night}`);
+    assert.deepEqual(spawns.map((x)=>x.data.id),['S1','S2','S3']);
+  }
+});
+
 test('pulse returns every stolen mote with dropped kind and next-tick availability',()=>{
   const sim=new Simulation({seed:6,night:2,scenario:{random_motes:false,random_shades:false,player:{carried:3},drifters:[{id:'D1',pos:[0,0,2],state:'flee',stolen:3}]}});
   sim.step({pulse:true});

@@ -7,4 +7,5 @@ description: Regenerate Phase 4 evidence (bench, soak, screenshots) from the cur
 2. `npm run bench -- --seed 42 --duration 30 --out docs/proof/phase-4/bench.json` (Chrome, 1280x720, vsync off; needs a GPU, `BENCH_SOFTWARE_GL=1` forces SwiftShader for comparison).
 3. `npm run soak -- --seed 7 --nights 10 --out docs/proof/phase-4/soak.json`.
 4. Do not hand-edit the JSON. `load_ms` must be positive and `crashes` 0; copy the numbers into `docs/proof/phase-4/README.md` only after the run.
-5. State anything that failed or was not measured (for example `peak_mem_mb: null`) in the proof README.
+5. Run the contract commands the way the grader will: append flags to `run_cmd`, `bench_cmd`, `soak_cmd` from `game.contract.json`.
+6. State anything that failed or was not measured (for example `peak_mem_mb: null`) in the proof README.

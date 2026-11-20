@@ -13,8 +13,8 @@ export const CONFIG = Object.freeze({
   dropTtl: 480, respawnTicks: 60, moteSpawnEvery: 240,
   nights: {
     1: { name: 'Đảo Bến', seconds: 240, shadeSpeed: 4, shadeFirst: 300, shadeEvery: 480, maxShades: 6, lanterns: [[0,0,25],[23.8,0,7.7],[14.7,0,-20.2],[-14.7,0,-20.2],[-23.8,0,7.7]] },
-    2: { name: 'Đảo Cau', seconds: 270, shadeSpeed: 4, shadeFirst: 420, shadeEvery: 420, maxShades: 8, lanterns: [[0,0,20],[17,0,-10],[-17,0,-10],[70,0,20],[87,0,-10],[53,0,-10]] },
-    3: { name: 'Đảo Chuông', seconds: 300, shadeSpeed: 4.5, shadeFirst: 360, shadeEvery: 360, maxShades: 10, lanterns: [[0,6,6],[18,3,10],[-18,3,10],[35,0,-10],[-35,0,-10],[20,0,-35],[-20,0,-35]] },
+    2: { name: 'Đảo Cau', seconds: 270, shadeSpeed: 4, shadeFirst: 300, shadeEvery: 420, maxShades: 8, lanterns: [[0,0,20],[17,0,-10],[-17,0,-10],[70,0,20],[87,0,-10],[53,0,-10]] },
+    3: { name: 'Đảo Chuông', seconds: 300, shadeSpeed: 4.5, shadeFirst: 300, shadeEvery: 360, maxShades: 10, lanterns: [[0,6,6],[18,3,10],[-18,3,10],[35,0,-10],[-35,0,-10],[20,0,-35],[-20,0,-35]] },
   },
   score: { moteDeposited: 5, lanternLit: 100, lanternRelit: 40, pulseHit: 5, pulseDrainHit: 15, dawnLitLantern: 50, flameRemaining: 50 },
 });
