@@ -1,0 +1,6 @@
+{
+  "player": { "pos": [0, -10.1, 0], "carried": 4, "flames": 1, "invuln_ticks": 50 },
+  "random_motes": false,
+  "random_shades": false,
+  "motes": []
+}

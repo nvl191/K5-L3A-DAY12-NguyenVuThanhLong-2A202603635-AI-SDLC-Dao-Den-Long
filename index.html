@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0e1430" />
+    <meta name="description" content="Đảo Đèn Lồng — một đêm phiêu lưu giữa biển mây." />
+    <title>Đảo Đèn Lồng — Đêm 1</title>
+  </head>
+  <body>
+    <canvas id="game" aria-label="Thế giới game Đảo Đèn Lồng"></canvas>
+    <div class="atmosphere" aria-hidden="true"></div>
+
+    <main id="ui">
+      <section id="hud" class="hud hidden" aria-live="polite">
+        <div class="hud-top">
+          <div class="hud-card fire-card"><span class="eyebrow">NGỌN LỬA</span><div id="flames" class="flames"></div></div>
+          <div class="hud-card clock-card"><span id="night-label" class="eyebrow">ĐÊM 1 · ĐẢO BẾN</span><strong id="timer">05:00</strong><span id="wind-label" class="wind-label hidden">Gió đang nổi</span></div>
+          <div class="hud-card score-card"><span class="eyebrow">ĐÈN LỒNG</span><strong><span id="lantern-count">0</span><small> / <span id="lantern-total">5</span></small></strong><span class="score-line"><i>✦</i> <span id="score">0</span> điểm</span></div>
+        </div>
+        <div class="hud-bottom">
+          <div class="objective-pill"><span class="objective-dot"></span><span id="objective">Giữ đủ đèn sáng tới bình minh</span></div>
+          <div class="inventory-wrap"><div id="inventory" class="inventory" aria-label="Đom đóm đang mang"></div><span id="inventory-label">0 / 10</span></div>
+          <div class="ability-row">
+            <div class="ability" id="dash-ability"><span class="keycap">⇧</span><span class="ability-icon">➤</span><span class="ability-name">Lướt</span><i class="cooldown"></i></div>
+            <div class="ability" id="pulse-ability"><span class="keycap">Q</span><span class="ability-icon">✧</span><span class="ability-name">Tỏa sáng</span><i class="cooldown"></i></div>
+          </div>
+        </div>
+        <div id="interact-prompt" class="interact-prompt hidden"><kbd>E</kbd><span id="interact-action">Thắp sáng</span><b id="deposit-progress">0/10</b></div>
+        <div id="target-arrow" class="target-arrow hidden"><span>✦</span><b>Đèn gần nhất</b></div>
+        <div class="controls-hint"><kbd>W A S D</kbd> di chuyển <span>·</span> <kbd>Space</kbd> nhảy <span>·</span> <kbd>Q</kbd> tỏa sáng <span>·</span> <kbd>P</kbd> tạm dừng</div>
+      </section>
+
+      <section id="screen" class="screen" role="dialog" aria-modal="true" aria-labelledby="screen-title">
+        <div class="screen-backdrop"></div>
+        <div class="screen-card">
+          <div class="brand-mark"><span class="brand-orbit"></span><span class="brand-lantern">✦</span></div>
+          <p id="screen-kicker" class="screen-kicker">CHUYỆN KỂ GIỮA BIỂN MÂY</p>
+          <h1 id="screen-title">Đảo Đèn<br /><em>Lồng</em></h1>
+          <p id="screen-copy" class="screen-copy">Sương đen đang phủ kín đảo. Hãy gom đom đóm, thắp lại đèn và đưa bình minh trở về.</p>
+          <div id="screen-extra" class="screen-extra"></div>
+          <div id="screen-actions" class="screen-actions"></div>
+          <div class="screen-foot"><span>✧</span> MỘT CÂU CHUYỆN ĐÊM TRÊN BIỂN MÂY <span>✧</span></div>
+        </div>
+      </section>
+
+      <div id="toast" class="toast" role="status"></div>
+      <div id="wind-warning" class="wind-warning hidden">LÁ BAY NGƯỢC CHIỀU GIÓ</div>
+    </main>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
